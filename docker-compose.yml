@@ -3,26 +3,30 @@ version: '3'
 services:
   influx:
     image: influxdb:latest
-    container_name: influx
+    container_name: ${INFLUX_CONTAINER}
+    restart: always
     ports:
-      - "8086:8086"
+      - "${INFLUX_PORT_API}:8086"
     volumes:
       - influx:/var/lib/influxdb
     environment:
-      - INFLUXDB_DB=test
-      - INFLUXDB_ADMIN_USER=influx
-      - INFLUXDB_ADMIN_PASSWORD=password
+      - INFLUXDB_HOST=${INFLUX_HOST}
+      - INFLUXDB_DB=${INFLUX_DBNAME}
+      - INFLUXDB_ADMIN_USER=${INFLUX_USER}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUX_PASSWORD}
     networks:
       - influx
 
   postgres:
     image: library/postgres:latest
-    container_name: postgres
+    container_name: ${POSTGRES_CONTAINER}
+    restart: always
     ports:
-      - "5433:5432"
+      - "${POSTGRES_PORT_API}:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -30,13 +34,14 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana
+    container_name: ${GRAFANA_CONTAINER}
+    restart: always
     ports:
-      - "3000:3000"
+      - "${GRAFANA_PORT_API}:3000"
     environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: password
-      GF_SERVER_ROOT_URL: http://localhost:3000/grafana/
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_SERVER_ROOT_URL: http://localhost:${GRAFANA_PORT_API}/grafana/
       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
       GF_USERS_DEFAULT_THEME: "dark"
       GF_INSTALL_PLUGINS: grafana-worldmap-panel, citilogics-geoloop-panel
