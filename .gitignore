@@ -1,2 +1,4 @@
 .idea/
 data/dashbord.json
+*.pyc
+scripts/__pychache__/

@@ -5,7 +5,7 @@
 #   create-database   Create postgres database.
 #   init-schema       Initialize postgres schema.
 #   service           Start up the application.
-#   clean			  Stop running application.
+#   clean             Stop running application.
 #   prune             Remove the containers.
 #
 include .env
@@ -20,7 +20,7 @@ create-database:
 	$(PSQL) -c "CREATE DATABASE $(POSTGRES_DBNAME)"
 
 init-schema:
-	$(PSQL) -d $(POSTGRES_DBNAME) -f scripts/schema.sql
+	$(PSQL) -d $(POSTGRES_DBNAME) -f ../scripts/schema.sql
 
 service:
 	docker-compose up
@@ -30,6 +30,9 @@ clean:
 
 prune:
 	docker system prune -af
+
+populate-data:
+	python ../scripts/loaders.py
 
 test:
 	@echo $(POSTGRES_HOST)
