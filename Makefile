@@ -1,8 +1,12 @@
 # Usage: make COMMAND
 #
 # Commands
-#   help        Show help message.
-#   service     Start up the application.
+#   help              Show help message.
+#   create-database   Create postgres database.
+#   init-schema       Initialize postgres schema.
+#   service           Start up the application.
+#   clean			  Stop running application.
+#   prune             Remove the containers.
 #
 include .env
 
@@ -20,6 +24,12 @@ init-schema:
 
 service:
 	docker-compose up
+
+clean:
+	docker-compose down
+
+prune:
+	docker system prune -af
 
 test:
 	@echo $(POSTGRES_HOST)
