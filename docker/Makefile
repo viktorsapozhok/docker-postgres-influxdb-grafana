@@ -4,9 +4,12 @@
 #   help              Show help message.
 #   create-database   Create postgres database.
 #   init-schema       Initialize postgres schema.
-#   service           Start up the application.
-#   clean             Stop running application.
-#   prune             Remove the containers.
+#   build             Build application.
+#   service           Start up application.
+#   data-server       Serve data directory.
+#   stop              Stop running application.
+#   clean             Stop app and remove containers.
+#   clean-all         Remove app, remove containers and volumes.
 #
 include .env
 
@@ -14,7 +17,7 @@ PSQL = PGPASSWORD=$(POSTGRES_PASSWORD) \
 	psql -h $(POSTGRES_HOST) -p $(POSTGRES_PORT) -U $(POSTGRES_USER)
 
 help:
-	@head -6 Makefile
+	@head -13 Makefile
 
 create-database:
 	$(PSQL) -c "CREATE DATABASE $(POSTGRES_DBNAME)"
@@ -28,7 +31,10 @@ build:
 	make init-schema
 
 service:
-	docker-compose up
+	docker-compose up -d
+
+data-server:
+	python -m http.server --directory ../data/
 
 stop:
 	docker-compose down
@@ -40,6 +46,3 @@ clean:
 clean-all:
 	make clean
 	docker volume prune
-
-test:
-	@echo $(POSTGRES_VOLUME)
