@@ -1,7 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS covid;
 
 CREATE TABLE IF NOT EXISTS covid.countries_aggregated (
-	date timestamp,
+    date timestamp,
     country TEXT,
     confirmed integer,
     recovered integer,
@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS covid.countries_aggregated (
 );
 
 CREATE TABLE IF NOT EXISTS covid.countries_ref (
-	uid integer,
-	iso2 TEXT,
-	iso3 TEXT,
-	code3 integer,
+    uid integer,
+    iso2 TEXT,
+    iso3 TEXT,
+    code3 integer,
     fips integer,
     admin2 TEXT,
     province_state TEXT,
