@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  influx:
+    image: influxdb:latest
+    container_name: influx
+    ports:
+      - "8086:8086"
+    volumes:
+      - influx:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=test
+      - INFLUXDB_ADMIN_USER=influx
+      - INFLUXDB_ADMIN_PASSWORD=password
+    networks:
+      - influx
+
+  postgres:
+    image: library/postgres:latest
+    container_name: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - postgres
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: password
+      GF_SERVER_ROOT_URL: http://localhost:3000/grafana/
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_USERS_DEFAULT_THEME: "dark"
+      GF_INSTALL_PLUGINS: grafana-worldmap-panel, citilogics-geoloop-panel
+    volumes:
+      - grafana:/var/lib/grafana:rw
+    depends_on:
+      - influx
+      - postgres
+    networks:
+      - influx
+      - postgres
+
+networks:
+  influx:
+    driver: bridge
+  postgres:
+    driver: bridge
+
+volumes:
+  influx:
+  postgres-data:
+  grafana:
