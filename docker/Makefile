@@ -11,7 +11,7 @@
 include .env
 
 PSQL = PGPASSWORD=$(POSTGRES_PASSWORD) \
-	psql -h $(POSTGRES_HOST) -p $(POSTGRES_PORT_API) -U $(POSTGRES_USER)
+	psql -h $(POSTGRES_HOST) -p $(POSTGRES_PORT) -U $(POSTGRES_USER)
 
 help:
 	@head -6 Makefile
@@ -22,17 +22,24 @@ create-database:
 init-schema:
 	$(PSQL) -d $(POSTGRES_DBNAME) -f ../scripts/schema.sql
 
+build:
+	docker-compose up -d
+	make create-database
+	make init-schema
+
 service:
 	docker-compose up
 
-clean:
+stop:
 	docker-compose down
 
-prune:
+clean:
+	make stop
 	docker system prune -af
 
-populate-data:
-	python ../scripts/loaders.py
+clean-all:
+	make clean
+	docker volume prune
 
 test:
-	@echo $(POSTGRES_HOST)
+	@echo $(POSTGRES_VOLUME)
