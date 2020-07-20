@@ -25,6 +25,9 @@ create-database:
 init-schema:
 	$(PSQL) -d $(POSTGRES_DBNAME) -f ../scripts/schema.sql
 
+delete-tables:
+	$(PSQL) -d $(POSTGRES_DBNAME) -f ../scripts/delete_tables.sql
+
 build:
 	docker-compose up -d
 	make create-database

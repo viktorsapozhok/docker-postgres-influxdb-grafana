@@ -17,10 +17,18 @@ CREATE TABLE IF NOT EXISTS covid.countries_ref (
     fips integer,
     admin2 TEXT,
     province_state TEXT,
-    country TEXT,
+    country_region TEXT,
     lat float(2),
-    lon float(2),
+    long_ float(2),
     combined_key TEXT,
     population integer,
     PRIMARY KEY (uid)
+);
+
+CREATE TABLE IF NOT EXISTS covid.us_aggregated (
+    uid integer,
+    date timestamp,
+    confirmed integer,
+    deaths integer,
+    PRIMARY KEY (uid, date)
 );

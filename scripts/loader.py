@@ -34,52 +34,45 @@ def get_conn_params(db='postgres'):
     return params
 
 
+def export_to_postgres(client, table_name, df):
+    client.copy_from(table_name, df, format_data=True, where='1=1')
+
+
+def export_to_influx(client, measurement, df, tag_columns, field_columns):
+    client.write_points(
+        df.set_index('date'), measurement,
+        tag_columns=tag_columns, field_columns=field_columns, protocol='line')
+
+
 if __name__ == '__main__':
     # load environment variables from file
     load_dotenv(os.path.join(root_dir, 'docker', '.env'))
 
     # init postgres client
     conn_params = get_conn_params(db='postgres')
-    commuter = Commuter(**conn_params)
+    commuter = Commuter(**conn_params, schema='covid')
 
     # init influx client
     conn_params = get_conn_params(db='influx')
     client = DataFrameClient(**conn_params)
 
-    # read countries reference data
-    rename_col = {'country_region': 'country', 'long_': 'lon'}
-    df = read_data('reference.csv', rename_col=rename_col)
-    commuter.copy_from(
-        table_name='countries_ref',
-        data=df,
-        schema='covid',
-        format_data=True,
-        where='1=1')
+    # countries reference data
+    df = read_data('reference.csv')
+    export_to_postgres(commuter, 'countries_ref', df)
 
-    # read aggregated statistics by countries
+    # aggregated statistics by countries
     df = read_data('countries-aggregated.csv')
-    # upload to postgres
-    commuter.copy_from(
-        table_name='countries_aggregated',
-        data=df,
-        schema='covid',
-        format_data=True,
-        where='1=1')
+    export_to_postgres(commuter, 'countries_aggregated', df)
 
     # upload to influx
-    df.set_index('date', inplace=True)
-    df['active'] = df['confirmed'] - df['recovered']
-    client.write_points(
-        dataframe=df,
-        measurement='active_cases',
-        tag_columns=['country'],
-        field_columns=['active'],
-        protocol='line')
+    df['active'] = df['confirmed'] - df['recovered'] - df['deaths']
+    df['active_log'] = np.log(1 + 0.0001 * df['active'])
+    export_to_influx(client, 'active', df, ['country'], ['active'])
+    export_to_influx(client, 'active_log', df, ['country'], ['active_log'])
 
-    df['active_scaled'] = np.log(1 + 0.0001 * df['active'])
-    client.write_points(
-        dataframe=df,
-        measurement='active_scaled',
-        tag_columns=['country'],
-        field_columns=['active_scaled'],
-        protocol='line')
+    # US confirmed/deaths statistics
+    confirmed = read_data('us_confirmed.csv', rename_col={'case': 'confirmed'})
+    deaths = read_data('us_deaths.csv', rename_col={'case': 'deaths'})
+    df = confirmed[['uid', 'date', 'confirmed']].merge(
+        deaths[['uid', 'date', 'deaths']], how='inner', on=['uid', 'date'])
+    export_to_postgres(commuter, 'us_aggregated', df)
