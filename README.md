@@ -48,3 +48,15 @@ password `password`.
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/grafana_login.png" width="720">
    
 ## Data Sources
+
+Before you create a dashboard, you need to add InfluxDB and PostgreSQL data sources.
+Follow [this guide](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/) to find out
+how to do this.
+
+Here is the configuration parameters we use to add InfluxDB data source.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/influx.png" width="720">
+
+This is the configuration parameters we use to add PostgreSQL data source.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/postgres.png" width="720">
