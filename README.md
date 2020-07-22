@@ -45,6 +45,17 @@ services:
       - "5433:5432"
 ```
 
+Before we login to Grafana UI, we need to create PostgreSQL database. Note that we already created InfluxDB
+database specifying `ÌNFLUXDB_DB` environment variable in docker-compose file.
+
+To create postgres database we use [psql](http://postgresguide.com/utilities/psql.html), Postgres interactive terminal.
+Check [Makefile](/docker/Makefile) for more details.
+
+```
+$ make -C docker/ create-database
+$ make -C docker/ init-schema
+```
+
 Now we can login to the Grafana web UI in browser (http://localhost:3000/grafana/) with the login `admin` and 
 password `password`.
 
