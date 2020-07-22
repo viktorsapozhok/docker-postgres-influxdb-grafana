@@ -4,11 +4,11 @@ This repo provides a quick guide of how to configure a dashboard environment fro
 [Grafana](https://github.com/grafana/grafana), Postgres and InfluxDB and build animated maps using 
 [GeoLoop Panel](https://github.com/CitiLogics/citilogics-geoloop-panel) plugin.
 
+<p>&nbsp;</p>
 
-<figure>
-  <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/preview.gif">
-  <figcaption><small>Fig.1: Number of active covid-19 cases by countries.</small></figcaption>
-</figure>
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/preview.gif">
+
+**<small>Fig.1: Number of active covid-19 cases by countries.</small>**
 
 ## Quick Start
 
