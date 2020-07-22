@@ -29,8 +29,9 @@ c4453cac69eb        postgres:latest             0.0.0.0:5433->5432/tcp   postgre
 ```
 
 Three containers have been created and started. For the app services we expose the following ports: 
-3000 (grafana), 8086 (influx), 5432 (postgres). Note that we use `HOST:CONTAINER` mapping when specify
-postgres ports in docker-compose file:
+3000 (grafana), 8086 (influx), 5432 (postgres). Note that we use `HOST:CONTAINER` mapping when specifying
+postgres ports in docker-compose file. Inside a docker container, postgres is running on port `5432`, whereas the publicly exposed port
+outside the container is `5433`. 
 
 ```
 version: '3'
@@ -41,8 +42,8 @@ services:
       - "5433:5432"
 ```
 
-Inside a docker container, postgres is running on port `5432`, whereas the publicly exposed port
-outside the container is `5433`. 
+Now we can login to the Grafana web UI in browser (http://localhost:3000/grafana/) with the login `admin` and 
+password `password`.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/grafana_login.png" width="720">
    
