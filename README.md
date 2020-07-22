@@ -45,7 +45,7 @@ services:
       - "5433:5432"
 ```
 
-Before we login to Grafana UI, we need to create PostgreSQL database. Note that we already created InfluxDB
+Before we login to Grafana UI, we need to create PostgreSQL database. Note that we have already created InfluxDB
 database specifying `ÌNFLUXDB_DB` environment variable in docker-compose file.
 
 To create postgres database we use [psql](http://postgresguide.com/utilities/psql.html), Postgres interactive terminal.
@@ -63,7 +63,7 @@ password `password`.
    
 ## Data Sources
 
-Before you create a dashboard, you need to add InfluxDB and PostgreSQL data sources.
+Before we create a dashboard, we need to add InfluxDB and PostgreSQL data sources.
 Follow [this guide](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/) to find out
 how to do this.
 
@@ -77,3 +77,5 @@ This is the configuration parameters we use to add PostgreSQL data source.
 
 The valid password for both data sources is `password`. You can change the credentials in [docker/.env](/docker/.env) file
 before starting the service via `docker-compose up`.
+
+## Populating the database
