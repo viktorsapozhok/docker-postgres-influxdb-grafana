@@ -4,9 +4,12 @@ This repo provides a quick guide of how to configure a dashboard environment fro
 [Grafana](https://github.com/grafana/grafana), Postgres and InfluxDB and build animated maps using 
 [GeoLoop Panel](https://github.com/CitiLogics/citilogics-geoloop-panel) plugin.
 
-<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/preview.gif">
+## GeoLoop Panel Example
 
-**Fig.1: Number of active covid-19 cases by countries.**
+The following animation shows the total number of active Covid-19 cases reported in each country
+at each point of time. Active cases = total confirmed - total recovered - total deaths.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/preview.gif">
 
 ## Quick Start
 
@@ -53,10 +56,13 @@ Before you create a dashboard, you need to add InfluxDB and PostgreSQL data sour
 Follow [this guide](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/) to find out
 how to do this.
 
-Here is the configuration parameters we use to add InfluxDB data source.
+Here is the configuration parameters we use to add InfluxDB data source. 
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/influx.png" width="720">
 
 This is the configuration parameters we use to add PostgreSQL data source.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/postgres.png" width="720">
+
+The valid password for both data sources is `password`. You can change the credentials in [docker/.env](/docker/.env) file
+before starting the service via `docker-compose up`.
