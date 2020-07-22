@@ -5,7 +5,7 @@ This repo provides a quick guide of how to configure a dashboard environment fro
 [GeoLoop Panel](https://github.com/CitiLogics/citilogics-geoloop-panel) plugin.
 
 <figure>
-  <img src="" alt="my alt text"/>
+  <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/preview.gif" alt="my alt text"/>
   <figcaption>This is my caption text.</figcaption>
 </figure>
 
