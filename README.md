@@ -44,6 +44,6 @@ services:
 Inside a docker container, postgres is running on port `5432`, whereas the publicly exposed port
 outside the container is `5433`. 
 
-<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/login.png" width="720">
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/grafana_login.png" width="720">
    
 ## Data Sources
