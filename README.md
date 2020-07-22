@@ -79,3 +79,21 @@ The valid password for both data sources is `password`. You can change the crede
 before starting the service via `docker-compose up`.
 
 ## Populating the database
+
+To illustrate the process of building the animated map with GeoLoop Panel plugin, we will use [time series data](https://github.com/datasets/covid-19)
+tracking the number of people affected by COVID-19 worldwide, including (1) confirmed cases of Coronavirus infection,
+(2) the number of people died while sick with Coronavirus, (3) the number of people recovered from it.
+
+List all tables within schema `covid`.
+
+```
+grafana=# \dt+ covid.*
+                            List of relations
+ Schema |         Name         | Type  |  Owner   |  Size   | Description 
+--------+----------------------+-------+----------+---------+-------------
+ covid  | countries_aggregated | table | postgres | 4136 kB | 
+ covid  | countries_ref        | table | postgres | 888 kB  | 
+ covid  | us_aggregated        | table | postgres | 60 MB   | 
+(3 rows)
+
+```
