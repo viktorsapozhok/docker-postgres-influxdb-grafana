@@ -14,33 +14,52 @@
 include .env
 
 PSQL = PGPASSWORD=$(POSTGRES_PASSWORD) \
-	psql -h $(POSTGRES_HOST) -p $(POSTGRES_PORT) -U $(POSTGRES_USER)
+	docker exec -i $(POSTGRES_CONTAINER) \
+	psql -h $(POSTGRES_HOST) -p 5432 -U $(POSTGRES_USER)
 
 help:
 	@head -13 Makefile
 
-create-database:
+postgres-console:
+	PGPASSWORD=$(POSTGRES_PASSWORD) \
+	docker exec -it $(POSTGRES_CONTAINER) \
+	psql -h $(POSTGRES_HOST) -p 5432 -U $(POSTGRES_USER) -d $(POSTGRES_DBNAME)
+
+postgres-create-db:
 	$(PSQL) -c "CREATE DATABASE $(POSTGRES_DBNAME)"
 
-init-schema:
-	$(PSQL) -d $(POSTGRES_DBNAME) -f ../scripts/schema.sql
+postgres-init-schema:
+	cat ../scripts/schema.sql | $(PSQL) -d $(POSTGRES_DBNAME)
 
-delete-tables:
-	$(PSQL) -d $(POSTGRES_DBNAME) -f ../scripts/delete_tables.sql
+postgres-copy-data:
+	cat ../data/reference.csv | $(PSQL) -d $(POSTGRES_DBNAME) \
+	-c "COPY covid.countries_ref FROM STDIN CSV HEADER"
+
+	cat ../data/us_confirmed.csv | $(PSQL) -d $(POSTGRES_DBNAME) \
+	-c "COPY covid.us_confirmed FROM STDIN CSV HEADER"
+
+	cat ../data/countries-aggregated.csv | $(PSQL) -d $(POSTGRES_DBNAME) \
+	-c "COPY covid.countries_aggregated FROM STDIN CSV HEADER"
+
+postgres-delete-tables:
+	cat ../scripts/delete_tables.sql | $(PSQL) -d $(POSTGRES_DBNAME)
+
+influx-console:
+	docker exec -it $(INFLUX_CONTAINER) influx -database '$(INFLUX_DBNAME)'
+
+influx-copy-data:
+	python ../scripts/write_points.py
 
 build:
 	docker-compose up -d
-	make create-database
-	make init-schema
+	make postgres-create-database
+	make postgres-init-schema
 
 service:
 	docker-compose up -d
 
 data-server:
 	python -m http.server --directory ../data/
-
-influx-cli:
-	docker exec -it $(INFLUX_CONTAINER) influx -database '$(INFLUX_DBNAME)'
 
 stop:
 	docker-compose down

@@ -46,7 +46,7 @@ services:
 ```
 
 Before we login to Grafana UI, we need to create PostgreSQL database. Note that we have already created InfluxDB
-database specifying `ÌNFLUXDB_DB` environment variable in docker-compose file.
+database specifying `INFLUXDB_DB` environment variable in docker-compose file.
 
 To create postgres database we use [psql](http://postgresguide.com/utilities/psql.html), Postgres interactive terminal.
 Check [Makefile](/docker/Makefile) for more details.
@@ -84,7 +84,7 @@ To illustrate the process of building the animated map with GeoLoop Panel plugin
 tracking the number of people affected by COVID-19 worldwide, including confirmed cases of Coronavirus infection, 
 the number of people died while sick with Coronavirus, the number of people recovered from it.
 
-We read data from [this repo](https://datahub.io/core/covid-19) and write it to three postgres tables: 
+We read data from [this repo](https://github.com/datasets/covid-19) and write it to three postgres tables: 
 
 * countries_aggregated - cumulative cases across the globe.
 * us_aggregated - cumulative cases for US regions.
@@ -132,15 +132,14 @@ name
 active
 active_log
 
-> SHOW SERIES FROM active_log
+> SHOW SERIES FROM active_log LIMIT 5 
 key
 ---
-active_log,country=Afghanistan
-active_log,country=Albania
-active_log,country=Algeria
-active_log,country=Andorra
-active_log,country=Angola
-...
+active_log,Country=Afghanistan
+active_log,Country=Albania
+active_log,Country=Algeria
+active_log,Country=Andorra
+active_log,Country=Angola
 ```
 
 ## Worldmap Panel

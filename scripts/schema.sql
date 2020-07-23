@@ -1,34 +1,42 @@
 CREATE SCHEMA IF NOT EXISTS covid;
 
-CREATE TABLE IF NOT EXISTS covid.countries_aggregated (
-    date timestamp,
-    country TEXT,
-    confirmed integer,
-    recovered integer,
-    deaths integer,
-    PRIMARY KEY (date, country)
+CREATE TABLE covid.countries_ref(
+    uid INTEGER NOT NULL PRIMARY key,
+    iso2 VARCHAR(2),
+    iso3 VARCHAR(3),
+    code3 INTEGER,
+    fips INTEGER,
+    admin2 VARCHAR(41),
+    province_state VARCHAR(40),
+    country_region VARCHAR(32),
+    lat NUMERIC(11,8),
+    long_ NUMERIC(13,9),
+    combined_key VARCHAR(55),
+    population INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS covid.countries_ref (
-    uid integer,
-    iso2 TEXT,
-    iso3 TEXT,
-    code3 integer,
-    fips integer,
-    admin2 TEXT,
-    province_state TEXT,
-    country_region TEXT,
-    lat float(2),
-    long_ float(2),
-    combined_key TEXT,
-    population integer,
-    PRIMARY KEY (uid)
+CREATE TABLE covid.countries_aggregated(
+   date DATE NOT NULL,
+   country VARCHAR(32) NOT NULL,
+   confirmed INTEGER,
+   recovered INTEGER,
+   deaths INTEGER,
+   PRIMARY KEY(date, country)
 );
 
-CREATE TABLE IF NOT EXISTS covid.us_aggregated (
-    uid integer,
-    date timestamp,
-    confirmed integer,
-    deaths integer,
-    PRIMARY KEY (uid, date)
+CREATE TABLE covid.us_confirmed(
+   uid INTEGER NOT NULL,
+   iso2 VARCHAR(2),
+   iso3 VARCHAR(3),
+   code3 INTEGER,
+   fips NUMERIC(7,1),
+   admin2 VARCHAR(41),
+   lat NUMERIC(19,15),
+   combined_key VARCHAR(55),
+   date DATE NOT NULL,
+   confirmed INTEGER,
+   long_ NUMERIC(18,14),
+   country_region VARCHAR(32),
+   province_state VARCHAR(40),
+   PRIMARY KEY (uid, date)
 );
