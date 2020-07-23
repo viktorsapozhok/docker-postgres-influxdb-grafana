@@ -39,6 +39,9 @@ service:
 data-server:
 	python -m http.server --directory ../data/
 
+influx-cli:
+	docker exec -it $(INFLUX_CONTAINER) influx -database '$(INFLUX_DBNAME)'
+
 stop:
 	docker-compose down
 

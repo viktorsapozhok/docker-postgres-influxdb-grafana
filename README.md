@@ -110,6 +110,38 @@ grafana=# \dt+ covid.*
 ```
 
 We also calculate logarithm of the number of active cases and write it to InfluxDB time-series "active_log".
+To make operations on influx database we can use [InfluxDB's CLI](https://docs.influxdata.com/influxdb/v1.8/tools/shell/) 
+inside a container.
+
+To access the CLI, we first launch `influx` in terminal. 
+
+```
+$ docker exec -it influx influx -database 'grafana'
+
+Connected to http://localhost:8086 version 1.8.1
+InfluxDB shell version: 1.8.1
+``` 
+
+Now we can enter InfluxQL queries as well as some CLI-specific commands directly in terminal.
+
+```
+> SHOW MEASUREMENTS
+name: measurements
+name
+----
+active
+active_log
+
+> SHOW SERIES FROM active_log
+key
+---
+active_log,country=Afghanistan
+active_log,country=Albania
+active_log,country=Algeria
+active_log,country=Andorra
+active_log,country=Angola
+...
+```
 
 ## Worldmap Panel
 
@@ -126,3 +158,6 @@ As the result we obtain the following map.
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/us.png" width="720">
 
 See Worldmap Panel plugin [documentation](https://grafana.com/grafana/plugins/grafana-worldmap-panel) for more details. 
+
+## Geoloop Panel
+
