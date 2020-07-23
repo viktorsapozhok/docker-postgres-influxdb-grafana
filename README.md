@@ -80,11 +80,23 @@ before starting the service via `docker-compose up`.
 
 ## Populating the database
 
-To illustrate the process of building the animated map with GeoLoop Panel plugin, we will use [time series data](https://github.com/datasets/covid-19)
-tracking the number of people affected by COVID-19 worldwide, including (1) confirmed cases of Coronavirus infection,
-(2) the number of people died while sick with Coronavirus, (3) the number of people recovered from it.
+To illustrate the process of building the animated map with GeoLoop Panel plugin, we will use time series data
+tracking the number of people affected by COVID-19 worldwide, including confirmed cases of Coronavirus infection, 
+the number of people died while sick with Coronavirus, the number of people recovered from it.
 
-List all tables within schema `covid`.
+We read data from [this repo](https://datahub.io/core/covid-19) and write it to three postgres tables: 
+
+* countries_aggregated - cumulative cases across the globe.
+* us_aggregated - cumulative cases for US regions.
+* countries_ref - regions metadata.
+
+To list all the tables in the database we need to login to the database via terminal.
+
+```
+$ psql -h localhost -p 5433 -U postgres -d grafana
+```
+
+And list all tables within schema `covid`.
 
 ```
 grafana=# \dt+ covid.*
@@ -95,5 +107,22 @@ grafana=# \dt+ covid.*
  covid  | countries_ref        | table | postgres | 888 kB  | 
  covid  | us_aggregated        | table | postgres | 60 MB   | 
 (3 rows)
-
 ```
+
+We also calculate logarithm of the number of active cases and write it to InfluxDB time-series "active_log".
+
+## Worldmap Panel
+
+First, we visualize the number of confirmed cases across the US regions using Worldmap panel.
+This panel is a tile map that can be overlaid with circles representing data points from a query.
+It needs two sources of data: a location (latitude and longitude) and data that has link to a location.
+
+The screenshot below shows the configuration settings we used.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/worldmap.png" width="720">
+
+As the result we obtain the following map.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/us.png" width="720">
+
+See Worldmap Panel plugin [documentation](https://grafana.com/grafana/plugins/grafana-worldmap-panel) for more details. 
