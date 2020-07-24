@@ -52,8 +52,8 @@ To create postgres database we use [psql](http://postgresguide.com/utilities/psq
 container. See [Makefile](/docker/Makefile) for more details.
 
 ```
-$ make -C docker/ create-database
-$ make -C docker/ init-schema
+$ make -C docker/ postgres-create-db
+$ make -C docker/ postgres-init-schema
 ```
 
 Now we can login to the Grafana web UI in browser (http://localhost:3000/grafana/) with the login `admin` and 

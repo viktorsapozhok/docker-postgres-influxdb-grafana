@@ -1,15 +1,20 @@
 # Usage: make COMMAND
 #
 # Commands
-#   help              Show help message.
-#   create-database   Create postgres database.
-#   init-schema       Initialize postgres schema.
-#   build             Build application.
-#   service           Start up application.
-#   data-server       Serve data directory.
-#   stop              Stop running application.
-#   clean             Stop app and remove containers.
-#   clean-all         Remove app, remove containers and volumes.
+#   help                    Show help message.
+#   postgres-console        Login to postgres interactive terminal.
+#   postgres-create-db      Create postgres database.
+#   postgres-init-schema    Initialize postgres schema.
+#   postgres-copy-data      Write data to postgres tables.
+#   postgres-delete-tables  Delete postgres tables.
+#   influx-console          Login to InfluxDB CLI.
+#   influx-copy-data        Write data to InfluxDB.
+#   build                   Build application.
+#   service                 Start up application.
+#   data-server             Serve data directory.
+#   stop                    Stop running application.
+#   clean                   Stop app and remove containers.
+#   clean-all               Remove app, remove containers and volumes.
 #
 include .env
 
@@ -18,7 +23,7 @@ PSQL = PGPASSWORD=$(POSTGRES_PASSWORD) \
 	psql -h $(POSTGRES_HOST) -p 5432 -U $(POSTGRES_USER)
 
 help:
-	@head -13 Makefile
+	@head -18 Makefile
 
 postgres-console:
 	PGPASSWORD=$(POSTGRES_PASSWORD) \
