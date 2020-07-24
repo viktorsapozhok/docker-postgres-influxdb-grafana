@@ -177,6 +177,6 @@ Here is the panel configuration settings.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/geoloop.png" width="720">
 
-And that's all, our dashboard looks like this.
+And that's all, our dashboard now looks like this.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/dashboard.png" width="720">
