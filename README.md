@@ -158,4 +158,22 @@ See Worldmap Panel plugin [documentation](https://grafana.com/grafana/plugins/gr
 
 ## Geoloop Panel
 
+Now everything is ready to configure the geoloop panel and visualize Covid-19 growth rates.
+Following [this tutorial](https://github.com/CitiLogics/citilogics-geoloop-panel/blob/master/README.md), we
+create a [GeoJSON](data/countries.geojson) with countries coordinates and wrap it up in a callback: `geo({ "type": "FeatureCollection", ... });`.
 
+To access geojson from grafana, we need to put it on a server somewhere. In this tutorial, we will confine ourselves
+to serving the local directory where geojson is stored (this approach is not recommended for production).
+
+```
+$ make -C docker/ data-server
+``` 
+
+The GeoJSON URL: `http://0.0.0.0:8000/countries.geojson`
+
+A further step is to obtain a free [MapBox API Key](https://www.mapbox.com/developers/) (the only thing is to create mapbox account)
+and that's it.
+
+Here is the panel configuration settings.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/geoloop.png" width="720">
