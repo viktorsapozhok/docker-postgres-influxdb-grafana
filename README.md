@@ -171,9 +171,12 @@ $ make -C docker/ data-server
 
 The GeoJSON URL: `http://0.0.0.0:8000/countries.geojson`
 
-A further step is to obtain a free [MapBox API Key](https://www.mapbox.com/developers/) (the only thing is to create mapbox account)
-and that's it.
+A further step is to obtain a free [MapBox API Key](https://www.mapbox.com/developers/), the only thing is to create mapbox account.
 
 Here is the panel configuration settings.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/geoloop.png" width="720">
+
+And that's all, our dashboard looks like this.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/dashboard.png" width="720">
