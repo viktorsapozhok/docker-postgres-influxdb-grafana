@@ -48,8 +48,8 @@ services:
 Before we login to Grafana UI, we need to create PostgreSQL database. Note that we have already created InfluxDB
 database specifying `INFLUXDB_DB` environment variable in docker-compose file.
 
-To create postgres database we use [psql](http://postgresguide.com/utilities/psql.html), Postgres interactive terminal.
-Check [Makefile](/docker/Makefile) for more details.
+To create postgres database we use [psql](http://postgresguide.com/utilities/psql.html), postgres terminal, inside the docker
+container. See [Makefile](/docker/Makefile) for more details.
 
 ```
 $ make -C docker/ create-database
@@ -57,7 +57,7 @@ $ make -C docker/ init-schema
 ```
 
 Now we can login to the Grafana web UI in browser (http://localhost:3000/grafana/) with the login `admin` and 
-password `password`.
+password `password` and initialize data sources.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/grafana_login.png" width="720">
    
@@ -78,85 +78,84 @@ This is the configuration parameters we use to add PostgreSQL data source.
 The valid password for both data sources is `password`. You can change the credentials in [docker/.env](/docker/.env) file
 before starting the service via `docker-compose up`.
 
-## Populating the database
+## Populating the Database
 
 To illustrate the process of building the animated map with GeoLoop Panel plugin, we will use time series data
 tracking the number of people affected by COVID-19 worldwide, including confirmed cases of Coronavirus infection, 
 the number of people died while sick with Coronavirus, the number of people recovered from it.
 
-We read data from [this repo](https://github.com/datasets/covid-19) and write it to three postgres tables: 
+We borrowed data from ["covid-19" dataset](https://github.com/datasets/covid-19) and store it as csv files in [data](data/) directory: 
 
-* countries_aggregated - cumulative cases across the globe.
-* us_aggregated - cumulative cases for US regions.
-* countries_ref - regions metadata.
+* [countries-aggregated.csv](data/countries-aggregated.csv) - cumulative cases (confirmed, recovered, deaths) across the globe.
+* [us_confirmed.csv](data/us_confirmed.csv) - cumulative confirmed cases for US regions.
+* [reference.csv](data/reference.csv) - regions metadata, location, names.
 
-To list all the tables in the database we need to login to the database via terminal.
-
-```
-$ psql -h localhost -p 5433 -U postgres -d grafana
-```
-
-And list all tables within schema `covid`.
+For writing this data to postgres tables we use `COPY FROM` command available via postgres console.
+See [Makefile](/docker/Makefile) for more details.
 
 ```
+$ make -C docker/ postgres-copy-data
+```
+
+After we have written data to the tables, we can login to terminal and view schema contents.
+
+```
+$ make -C docker/ postgres-console
+
+psql (12.3 (Debian 12.3-1.pgdg100+1))
+Type "help" for help.
+
 grafana=# \dt+ covid.*
                             List of relations
  Schema |         Name         | Type  |  Owner   |  Size   | Description 
 --------+----------------------+-------+----------+---------+-------------
- covid  | countries_aggregated | table | postgres | 4136 kB | 
- covid  | countries_ref        | table | postgres | 888 kB  | 
- covid  | us_aggregated        | table | postgres | 60 MB   | 
+ covid  | countries_aggregated | table | postgres | 1936 kB | 
+ covid  | countries_ref        | table | postgres | 496 kB  | 
+ covid  | us_confirmed         | table | postgres | 74 MB   | 
 (3 rows)
 ```
 
-We also calculate logarithm of the number of active cases and write it to InfluxDB time-series "active_log".
-To make operations on influx database we can use [InfluxDB's CLI](https://docs.influxdata.com/influxdb/v1.8/tools/shell/) 
-inside a container.
-
-To access the CLI, we first launch `influx` in terminal. 
+Now we calculate logarithm of the number of active cases and write it to InfluxDB database (measurement "covid").
+We can also login to influx database from console and view the database contents. 
 
 ```
-$ docker exec -it influx influx -database 'grafana'
+$ make -C docker/ influx-console
 
 Connected to http://localhost:8086 version 1.8.1
 InfluxDB shell version: 1.8.1
-``` 
 
-Now we can enter InfluxQL queries as well as some CLI-specific commands directly in terminal.
-
-```
 > SHOW MEASUREMENTS
 name: measurements
 name
 ----
-active
-active_log
+covid
 
-> SHOW SERIES FROM active_log LIMIT 5 
+> SHOW SERIES FROM covid LIMIT 5
 key
 ---
-active_log,Country=Afghanistan
-active_log,Country=Albania
-active_log,Country=Algeria
-active_log,Country=Andorra
-active_log,Country=Angola
-```
+covid,Country=Afghanistan
+covid,Country=Albania
+covid,Country=Algeria
+covid,Country=Andorra
+covid,Country=Angola
+``` 
 
 ## Worldmap Panel
 
-First, we visualize the number of confirmed cases across the US regions using Worldmap panel.
+Let's visualize the number of confirmed cases across the US regions using Worldmap panel.
 This panel is a tile map that can be overlaid with circles representing data points from a query.
 It needs two sources of data: a location (latitude and longitude) and data that has link to a location.
 
-The screenshot below shows the configuration settings we used.
+The screenshot below shows query and configuration settings we used.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/worldmap.png" width="720">
 
-As the result we obtain the following map.
+And as the result we obtain the following map.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/images/us.png" width="720">
 
 See Worldmap Panel plugin [documentation](https://grafana.com/grafana/plugins/grafana-worldmap-panel) for more details. 
 
 ## Geoloop Panel
+
 

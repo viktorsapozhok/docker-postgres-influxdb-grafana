@@ -27,5 +27,5 @@ df['active_log'] = np.log(1 + 0.0001 * df['active'])
 
 # import to influx
 client.write_points(
-    df.set_index('date'), 'active_log',
+    dataframe=df.set_index('date'), measurement='covid',
     tag_columns=['Country'], field_columns=['active_log'], protocol='line')
