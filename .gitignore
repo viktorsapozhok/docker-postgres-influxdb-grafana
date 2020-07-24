@@ -1,3 +1,4 @@
 .idea/
 *.pyc
 scripts/__pychache__/
+docs/build/
