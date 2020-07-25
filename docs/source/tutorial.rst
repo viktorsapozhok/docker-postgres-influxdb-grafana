@@ -87,7 +87,7 @@ tracking the number of people affected by COVID-19 worldwide, including confirme
 the number of people died while sick with Coronavirus, the number of people recovered from it.
 
 We borrowed data from `"covid-19" dataset <https://github.com/datasets/covid-19>`__
-and store it as csv files in [data](data/) directory:
+and store it as csv files in `data <data/>`__ directory:
 
 * `countries-aggregated.csv <https://github.com/viktorsapozhok/docker-postgres-influxdb-grafana/tree/master/data/countries-aggregated.csv>`__ - cumulative cases (confirmed, recovered, deaths) across the globe.
 * `us_confirmed.csv <https://github.com/viktorsapozhok/docker-postgres-influxdb-grafana/tree/master/data/us_confirmed.csv>`__ - cumulative confirmed cases for US regions.
@@ -194,8 +194,7 @@ Here is the panel configuration settings.
 .. image:: /images/geoloop.png
    :align: center
 
-And that's all, finally our dashboard looks like this.
+And that's how it looks like.
 
-.. image:: /images/dashboard.gif
+.. image:: /images/preview.gif
    :align: center
-

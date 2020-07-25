@@ -12,6 +12,6 @@ sick with Coronavirus, and the number of people recovered from it.
 The data is borrowed from [“covid-19” dataset](https://github.com/datasets/covid-19) 
 and stored as csv files in [data](data/) directory.
 
-<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/source/images/dashboard.gif">
-
 [Read the tutorial](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/tutorial.html) for more.
+
+<img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/source/images/dashboard.gif">
