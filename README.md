@@ -15,3 +15,7 @@ and stored as csv files in [data](data/) directory.
 [Read the tutorial](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/tutorial.html) for more.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/source/images/dashboard.gif">
+
+## License
+
+MIT License (see [LICENSE](LICENSE)).
