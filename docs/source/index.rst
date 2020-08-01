@@ -7,6 +7,7 @@ docker-postgres-influxdb-grafana
         Postgres and InfluxDB, create map overlays with Worldmap Panel plugin and
         build animated maps using GeoLoop Panel plugin.
     :keywords: postgresql, influxdb, grafana, geoloop panel, worldmap panel, animated map
+    :google-site-verification: wkNtHJvBxvApbXh93yaO6fiT-TMEjcK6IFExr0vQ-Ng
 
 This tutorial provides a quick guide of how to configure a dashboard environment
 from Grafana, Postgres and InfluxDB, create map overlays with Worldmap Panel plugin and
