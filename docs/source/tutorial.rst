@@ -1,9 +1,9 @@
-Tutorial
-========
+Building animated maps with Grafana
+===================================
 
 .. meta::
     :description lang=en:
-        Installing Grafana, PostgreSQL and InfluxDB with docker, creating animated maps
+        Installing Grafana, PostgreSQL and InfluxDB with docker, building animated maps
         with GeoLoop Panel plugin.
     :keywords: postgresql, influxdb, grafana, geoloop panel, worldmap panel, animated map
 
