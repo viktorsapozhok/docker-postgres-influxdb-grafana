@@ -63,6 +63,7 @@ password ``password`` and initialize data sources.
 
 .. image:: /images/grafana_login.png
    :align: center
+   :alt: Grafana login
 
 Data Sources
 ------------
@@ -75,11 +76,13 @@ Here is the configuration parameters we use to add InfluxDB data source.
 
 .. image:: /images/influx.png
    :align: center
+   :alt: Configuration parameters used to add InfluxDB data source
 
 And this is the configuration parameters we use to add PostgreSQL data source.
 
 .. image:: /images/postgres.png
    :align: center
+   :alt: Configuration parameters used to add PostgreSQL data source
 
 The valid password for both data sources is ``password``. You can change the credentials in
 `docker/.env <https://github.com/viktorsapozhok/docker-postgres-influxdb-grafana/tree/master/docker/.env>`__
@@ -161,11 +164,13 @@ The screenshot below shows query and configuration settings we used.
 
 .. image:: /images/worldmap.png
    :align: center
+   :alt: Configuring Worldmap Panel
 
 And as the result we obtain the following map.
 
 .. image:: /images/us.png
    :align: center
+   :alt: Worldmap Panel example
 
 See Worldmap Panel plugin `documentation <https://grafana.com/grafana/plugins/grafana-worldmap-panel>`__
 for more details.
@@ -199,8 +204,10 @@ Here is the panel configuration settings.
 
 .. image:: /images/geoloop.png
    :align: center
+   :alt: Configuring GeoLoop Panel
 
 And that's how it looks like.
 
 .. image:: /images/preview.gif
    :align: center
+   :alt: GeoLoop Panel
