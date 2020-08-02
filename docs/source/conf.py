@@ -16,6 +16,7 @@ user = 'viktorsapozhok'
 extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
+    'sphinx_sitemap'
 ]
 
 # The suffix of source filenames.
@@ -28,6 +29,8 @@ master_doc = 'index'
 pygments_style = 'sphinx'
 
 language = "en"
+
+html_baseurl = 'https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -45,3 +48,5 @@ html_context = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
+
+html_extra_path = ['robots.txt']
