@@ -46,4 +46,4 @@ html_context = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
 
-html_extra_path = ['robots.txt', 'sitemap_.xml']
+html_extra_path = ['robots.txt', 'sitemap.xml']
