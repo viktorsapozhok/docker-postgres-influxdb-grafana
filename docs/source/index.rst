@@ -23,7 +23,7 @@ and stored as csv files in `data <data/>`__ directory.
 
 .. image:: /images/dashboard.gif
    :align: center
-   :alt: Grafana dashboard example used Worldmap and GeoLoop Panel plugins to visualie "covid-19" data
+   :alt: Grafana dashboard example used Worldmap and GeoLoop Panel plugins to visualize "covid-19" data
 
 .. toctree::
    :maxdepth: 2
