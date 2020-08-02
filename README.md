@@ -1,5 +1,3 @@
-<meta name="google-site-verification" content="BaMk2Dd49NvMzudK0-CkSkgmdQhiBK5bcxeU9430QGg" />
-
 # docker-postgres-influxdb-grafana
 
 [![Documentation Status](https://readthedocs.org/projects/docker-postgres-influxdb-grafana/badge/?version=latest)](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/?badge=latest)
