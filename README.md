@@ -1,3 +1,5 @@
+<meta name="google-site-verification" content="BaMk2Dd49NvMzudK0-CkSkgmdQhiBK5bcxeU9430QGg" />
+
 # docker-postgres-influxdb-grafana
 
 [![Documentation Status](https://readthedocs.org/projects/docker-postgres-influxdb-grafana/badge/?version=latest)](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/?badge=latest)
@@ -12,7 +14,8 @@ including confirmed cases of Coronavirus infection, the number of people died wh
 sick with Coronavirus, and the number of people recovered from it.
 
 The data is borrowed from [“covid-19” dataset](https://github.com/datasets/covid-19) 
-and stored as csv files in [data](data/) directory.
+and stored as csv files in [data](https://github.com/viktorsapozhok/docker-postgres-influxdb-grafana/tree/master/data) 
+directory.
 
 [Read the tutorial](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/tutorial.html) for more.
 
