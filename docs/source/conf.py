@@ -29,8 +29,6 @@ pygments_style = 'sphinx'
 
 language = "en"
 
-html_baseurl = 'https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/'
-
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = 'sphinx_rtd_theme'
@@ -48,4 +46,4 @@ html_context = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
 
-html_extra_path = ['robots.txt', 'sitemap.xml']
+html_extra_path = ['robots.txt', 'sitemap_.xml']
