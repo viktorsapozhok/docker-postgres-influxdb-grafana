@@ -3,10 +3,10 @@ Building animated maps with Grafana
 
 .. meta::
     :description lang=en:
-        Installing Grafana, PostgreSQL and InfluxDB with docker,
+        Installing Grafana, PostgreSQL and InfluxDB with docker-compose,
         creating map overlays with Worldmap Panel, building animated maps
         with GeoLoop Panel plugin.
-    :keywords: postgresql, influxdb, grafana, geoloop panel, worldmap panel, animated map
+    :keywords: postgresql, influxdb, grafana, geoloop panel, worldmap panel, animated map, docker-compose
     :google-site-verification: wkNtHJvBxvApbXh93yaO6fiT-TMEjcK6IFExr0vQ-Ng
 
 This tutorial provides a quick guide of how to configure a dashboard environment
