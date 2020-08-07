@@ -2,8 +2,8 @@
 
 [![Documentation Status](https://readthedocs.org/projects/docker-postgres-influxdb-grafana/badge/?version=latest)](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/?badge=latest)
 
-This tutorial provides a quick guide of how to configure a dashboard environment 
-from Grafana, Postgres and InfluxDB, create map overlays with Worldmap Panel plugin and 
+This tutorial provides a quick guide of how to install a dashboard environment 
+from Grafana, Postgres and InfluxDB with docker-compose, create map overlays with Worldmap Panel plugin and 
 build animated maps using GeoLoop Panel plugin.
 
 To illustrate the process of building the animated maps with GeoLoop, 
