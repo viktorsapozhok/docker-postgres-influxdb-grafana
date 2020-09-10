@@ -1,7 +1,5 @@
 # docker-postgres-influxdb-grafana
 
-[![Documentation Status](https://readthedocs.org/projects/docker-postgres-influxdb-grafana/badge/?version=latest)](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/?badge=latest)
-
 This tutorial provides a quick guide of how to install a dashboard environment 
 from Grafana, Postgres and InfluxDB with docker-compose, create map overlays with Worldmap Panel plugin and 
 build animated maps using GeoLoop Panel plugin.
@@ -15,7 +13,7 @@ The data is borrowed from [“covid-19” dataset](https://github.com/datasets/c
 and stored as csv files in [data](https://github.com/viktorsapozhok/docker-postgres-influxdb-grafana/tree/master/data) 
 directory.
 
-[Read the tutorial](https://docker-postgres-influxdb-grafana.readthedocs.io/en/latest/tutorial.html) for more.
+[Read the tutorial](https://viktorsapozhok.github.io/docker-postgres-influxdb-grafana/) for more.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/source/images/dashboard.gif">
 
