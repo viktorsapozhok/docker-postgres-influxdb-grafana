@@ -13,7 +13,7 @@ The data is borrowed from [“covid-19” dataset](https://github.com/datasets/c
 and stored as csv files in [data](https://github.com/viktorsapozhok/docker-postgres-influxdb-grafana/tree/master/data) 
 directory.
 
-[Read the tutorial](https://viktorsapozhok.github.io/docker-postgres-influxdb-grafana/) for more.
+[Read the tutorial](https://viktorsapozhok.github.io/docker/postgres/influxdb/grafana-worldmap-geoloop) for more.
 
 <img src="https://raw.githubusercontent.com/viktorsapozhok/docker-postgres-influxdb-grafana/master/docs/source/images/dashboard.gif">
 
